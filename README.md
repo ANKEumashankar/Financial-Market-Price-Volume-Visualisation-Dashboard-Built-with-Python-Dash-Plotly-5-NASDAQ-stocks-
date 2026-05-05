@@ -1,1 +1,2 @@
-# Financial-Market-Price-Volume-Visualisation-Dashboard-Built-with-Python-Dash-Plotly-5-NASDAQ-stocks-
+# Financial Market Price and Volume Visualization
+Built with Python, Dash, and Plotly to analyze NASDAQ stocks.
