@@ -1,0 +1,23 @@
+import yfinance as yf
+import pandas as pd
+import os
+
+TICKERS = ["AAPL", "TSLA", "MSFT", "AMZN", "GOOGL"]
+START_DATE = "2024-07-01"
+END_DATE   = "2025-01-01"
+
+os.makedirs("raw_data", exist_ok=True)
+
+print("Downloading stock data...")
+
+for ticker in TICKERS:
+    print(f"  Downloading {ticker}...")
+    df = yf.download(ticker, start=START_DATE, end=END_DATE,
+                     auto_adjust=True, progress=False)
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
+    df = df.reset_index()
+    df.to_csv(f"raw_data/{ticker}_raw.csv", index=False)
+    print(f"  ✅ {ticker} saved — {len(df)} rows")
+
+print("\n✅ All stocks downloaded and saved in raw_data folder!")
